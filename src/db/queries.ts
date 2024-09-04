@@ -20,13 +20,6 @@ type Review = {
   author_id: number;
 };
 
-// type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = (
-//   parent: TParent,
-//   args: TArgs,
-//   context: TContext,
-//   info: GraphQLResolveInfo
-// ) => Promise<TResult>;
-
 const createResolvers = (pool: Pool) => ({
   Query: {
     games: async (): Promise<Game[]> => {
@@ -133,6 +126,8 @@ const createResolvers = (pool: Pool) => ({
 });
 
 export default createResolvers;
+
+// example with generic resolver types, not tested
 
 // import { Pool } from 'pg';
 // import { GraphQLResolveInfo } from 'graphql';
