@@ -122,6 +122,24 @@ const createResolvers = (pool: Pool) => ({
 
       return result.rows[0] || null;
     },
+    addReview: async (
+      _: any,
+      args: {
+        review: {
+          content: string;
+          rating: number;
+          game_id: string;
+          author_id: string;
+        };
+      }
+    ): Promise<Review> => {
+      const { content, rating, game_id, author_id } = args.review;
+      const result = await pool.query(
+        "INSERT INTO reviews(content, rating, game_id, author_id) VALUES($1, $2, $3, $4) RETURNING *",
+        [content, rating, parseInt(game_id), parseInt(author_id)]
+      );
+      return result.rows[0];
+    },
   },
 });
 
